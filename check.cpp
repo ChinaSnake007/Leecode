@@ -10,7 +10,7 @@ typedef long long ll;
 int main(){
     string s="123456";
     int a = 1;
-    cout<<char(48+a)+char(49+a)<<endl;
+    cout<<s<<endl;
 
     return 0;
 }
