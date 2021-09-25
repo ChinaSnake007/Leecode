@@ -43,10 +43,26 @@ int jump(vector<int> &nums)
     return sum;
 }
 
+int gaijinjump(vector<int> &nums){
+    if (nums.size() <= 2)
+        return nums.size() - 1;
+    vector<int> dp;
+    dp.resize(nums.size(),10002);
+    dp[0] = 0;
+    for(int i=0; i<nums.size();i++){
+        for(int j=1;j<=nums[i];j++){
+            if(i+j>=nums.size() - 1)
+                return dp[i]+1;
+            dp[i+j]=min(dp[i+j],dp[i]+1);
+        }
+    }
+    return dp[nums.size()-1];
+}
+
 int main()
 {
     vector<int> nums = {3,2,1};
     cout << jump(nums) << endl;
-
+    cout << gaijinjump(nums) << endl;
     return 0;
 }
