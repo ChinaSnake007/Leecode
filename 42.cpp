@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <stack>
+#include <cmath>
 using namespace std;
 typedef long long ll;
 void bianli(vector<int> a){
@@ -79,31 +80,51 @@ int trap1(vector<int> &nums){
     return sum;
 }
 //单调栈
-int trap(vector<int> &nums){
+int trap2(vector<int> &nums){
     int ans = 0;
     int i = 0;
     stack<int> S;
     while(i < nums.size()){
-
-
-
-
-        S.push(nums[i++]);
+        while(!S.empty()&&nums[i] > nums[S.top()]){
+            int top = S.top();
+            S.pop();
+            if(S.empty())
+                break;
+            ans += (i - S.top() - 1)*(min(nums[i],nums[S.top()]) - nums[top]);
+        }
+        S.push(i++);
     }
-
     return ans;
 }
 
 //双指针
-int trap2(vector<int> &nums){
+int trap3(vector<int> &height){
+    int left = 0, right = height.size() - 1;
+    int ans = 0;
+    int left_max = 0, right_max = 0;
+    while (left < right) {
+        if (height[left] < height[right]) {
+            height[left] >= left_max ? (left_max = height[left]) : ans += (left_max - height[left]);
+            ++left;
+        }
+        else {
+            height[right] >= right_max ? (right_max = height[right]) : ans += (right_max - height[right]);
+            --right;
+        }
+    }
+    return ans;
 
+// 作者：LeetCode
+// 链接：https://leetcode-cn.com/problems/trapping-rain-water/solution/jie-yu-shui-by-leetcode/
+// 来源：力扣（LeetCode）
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 }
 
 
 int main()
 {
-    vector<int> height = {9,6,8,8,5,6,3};
+    vector<int> height = {0,1,0,2,1,0,1,3,2,1,2,1};
     // bianli(height);
-    cout<<trap(height)<<endl;
+    cout<<trap3(height)<<endl;
     return 0;
 }
