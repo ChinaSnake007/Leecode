@@ -5,7 +5,11 @@
 #include <stack>
 using namespace std;
 typedef long long ll;
-
+void bianli(vector<int> a){
+    for(auto ans:a)
+        cout<<ans<<" ";
+    cout<<endl;
+}
 // int rongji(vector<int> &nums, int start, int end)
 // { //计算柱子i和柱子j之间的雨水的容积
 //     int sum = 0;
@@ -53,14 +57,53 @@ typedef long long ll;
 //     return sum;
 // }
 
+int trap1(vector<int> &nums){
+    //动态规划解法
+    if(nums.size() <= 2)
+        return 0;
+    int size = nums.size();
+    vector<int> leftMax;
+    leftMax.reserve(nums.size());
+    leftMax[0] = 0;
+    for(int i = 1; i < size;i++)
+        leftMax[i] = max(leftMax[i-1],nums[i-1]);
+    vector<int> rightMax;
+    rightMax.resize(nums.size());
+    leftMax[nums.size()-1] = 0;
+    for(int i = nums.size() - 2;i >= 0;i--){
+        rightMax[i] = max(rightMax[i+1],nums[i+1]);
+    }
+    int sum = 0;
+    for(int i = 0; i < nums.size();i++)
+       sum += (min(leftMax[i],rightMax[i]) - nums[i])<0?0:(min(leftMax[i],rightMax[i]) - nums[i]);
+    return sum;
+}
+//单调栈
 int trap(vector<int> &nums){
+    int ans = 0;
+    int i = 0;
+    stack<int> S;
+    while(i < nums.size()){
 
+
+
+
+        S.push(nums[i++]);
+    }
+
+    return ans;
+}
+
+//双指针
+int trap2(vector<int> &nums){
 
 }
+
 
 int main()
 {
     vector<int> height = {9,6,8,8,5,6,3};
+    // bianli(height);
     cout<<trap(height)<<endl;
     return 0;
 }
