@@ -29,6 +29,7 @@ void backtracking(int start, vector<int> nums,int sum,vector<int> Bool){
         sum = sum - 1;
         Bool[i]=0;
     }
+    return;
 }
 
 vector<vector<int>> permute(vector<int> &nums)
