@@ -3,6 +3,7 @@
         "ostream": "cpp",
         "iostream": "cpp",
         "*.tcc": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "map": "cpp"
     }
 }
